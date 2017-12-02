@@ -28,6 +28,7 @@ def hello_world():
 @app.route('/login',methods=['POST','GET'])
 def login():
     # 获取post.form
+
     PostForm=request.form
     # 获取post的字典
     dict_data = {key:dict(request.form)[key][0] for key in dict(request.form)}
@@ -43,6 +44,18 @@ def login():
     else :
         answer= User.sign(name,password)        
     return str(answer)
+
+# 获取用户数据
+@app.route('/test',methods=['POST','GET'])
+def test():
+    if request.method =='GET':
+        return 'you use a get method.'
+    else :
+        dict_data = {key:dict(request.form)[key][0] for key in dict(request.form)}
+        print(dict_data)
+        #print('request.data ',request.data)
+        print('request.form ',request.form)
+        return 'ok, server get it.'
     
 @app.route('/user',methods=['post'])
 def show_user_profile():
